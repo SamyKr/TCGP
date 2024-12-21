@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Empêche les débordements pendant l'animation */
+    flex-direction: column; /* Disposer le carré et le bouton en colonne */
+    position: relative; /* Nécessaire pour le positionnement des éléments */
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carre {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin-bottom: 20px;
+    position: relative;  /* Pour éviter le chevauchement avec d'autres éléments */
+    transition: transform 0.3s ease-in-out;
+    z-index: 2; /* S'assurer que le carré est au-dessus du cercle */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    z-index: 2;  /* Le bouton doit être au-dessus du carré */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#suivant {
+    margin-top: 20px;
+    display: none; /* Masquer initialement */
+}
+
+#inventaire {
+    margin-top: 20px;
+    text-align: center;
+    display: none; /* Masquer initialement */
+}
+
+#inventaire .triangle {
+    margin: 10px;
+}
+
+.triangle-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    display: none; /* Masquer initialement */
+}
+
+.triangle-container .triangle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    opacity: 0; /* Initialement caché */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.triangle-container .triangle:nth-child(1) {
+    animation: slideUp 2.5s forwards;
+}
+
+.triangle-container .triangle:nth-child(2) {
+    animation: slideUp 2s forwards;
+}
+
+.triangle-container .triangle:nth-child(3) {
+    animation: slideUp 1.5s forwards;
+}
+
+.triangle-container .triangle:nth-child(4) {
+    animation: slideUp 1s forwards;
+}
+
+.triangle-container .triangle:nth-child(5) {
+    animation: slideUpFirst 0.5s forwards;
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+
+/* Animation du cercle noir */
+@keyframes expandCircle {
+    0% {
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background-color: black;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        width: 500vw; /* Dépasser la largeur de l'écran */
+        height: 500vh; /* Dépasser la hauteur de l'écran */
+        top: 0;
+        left: 0;
+    }
+}
+
+.cercle-noir {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: black;
+    z-index: 10; /* Augmenter la valeur du z-index pour passer au-dessus des autres éléments */
+    animation: expandCircle 1s ease-out forwards;
+    transform: translate(-50%, -50%); /* Centrer précisément le cercle */
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUpFirst {
+    0% {
+        opacity: 1;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
